@@ -19,12 +19,13 @@ class ServerSendEvent {
             if (padding) {
                 this.res.write(":" + Array(2049).join(" ") + "\n"); // 2kB
             }
+
             this.res.write("retry: " + (option.retry || 3000) + '\n');
 
             if (heartbeat) {
                 setInterval(function () {
                     this.res.write("data: \n\n");
-                }.bind(this), 10000)
+                }.bind(this), option.heartbeat)
             }
 
         } else {

@@ -18,5 +18,8 @@
     "url": "git+https://github.com/trquoccuong/Server-Sent-Events-Nodejs.git"
   },
   "author": "Tran Quoc Cuong <trquoccuong@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "uuid": "^3.0.1"
+  }
 }
