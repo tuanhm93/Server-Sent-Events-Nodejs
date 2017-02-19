@@ -11,16 +11,16 @@ class SSEManager {
     const id = uuid();
     const client = new SSE(res, this.options);
 
-    listClient.push({
+    this.listClient.push({
       id,
       client
     });
 
     client.disconnect(() => {
-      const length = listClient.length;
+      const length = this.listClient.length;
       for(let i=0; i<length; i++) {
-        if(listClient[i].id === id) {
-          listClient.slice(i, 1);
+        if(this.listClient[i].id === id) {
+          this.listClient.slice(i, 1);
           break;
         }
       }
@@ -28,7 +28,7 @@ class SSEManager {
   }
 
   broadcast(eventName, data) {
-    listClient.forEach((inf) => {
+    this.listClient.forEach((inf) => {
       inf.client.sendEvent(eventName, data);
     });
   }
