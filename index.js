@@ -34,7 +34,4 @@ class SSEManager {
   }
 }
 
-module.exports = new SSEManager({
-  heartbeat: 10000,
-  retry: 10000
-});
+module.exports = SSEManager
