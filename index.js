@@ -5,10 +5,11 @@ class SSEManager {
   constructor(options) {
     this.options = options || {};
     this.listClient = [];
+    this.listMap = {};
   }
 
-  add(res) {
-    const id = uuid();
+  add(res, id) {
+    id = id || uuid();
     const client = new SSE(res, this.options);
 
     this.listClient.push({
@@ -16,15 +17,28 @@ class SSEManager {
       client
     });
 
+    this.listMap[id] = client;
+
     client.disconnect(() => {
       const length = this.listClient.length;
       for(let i=0; i<length; i++) {
         if(this.listClient[i].id === id) {
           this.listClient.slice(i, 1);
+          delete this.listMap[id];
           break;
         }
       }
     });
+  }
+
+  isHas(id) {
+    return !!this.listMap[id];
+  }
+
+  sentEvent(id, eventName, data) {
+    if(this.listMap[id]) {
+      this.listMap[id].sendEvent(eventName, data);
+    }
   }
 
   broadcast(eventName, data) {
