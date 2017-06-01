@@ -23,7 +23,7 @@ class SSEManager {
       const length = this.listClient.length;
       for(let i=0; i<length; i++) {
         if(this.listClient[i].id === id) {
-          this.listClient.slice(i, 1);
+          this.listClient.splice(i, 1);
           delete this.listMap[id];
           break;
         }
