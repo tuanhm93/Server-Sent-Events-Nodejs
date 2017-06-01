@@ -102,7 +102,7 @@ class ServerSendEvent {
   disconnect(fn) {
     if (typeof fn === 'function') {
       clearInterval(this.heartbeatInterval);
-      this.res.on('close', fn)
+      this.res.once('close', fn)
     } else {
       throw Error('Parameter must be a function')
     }
