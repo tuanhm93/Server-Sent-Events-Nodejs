@@ -28,8 +28,6 @@ class SSEManager {
           break;
         }
       }
-
-      delete this.listMap[id];
     });
   }
 
