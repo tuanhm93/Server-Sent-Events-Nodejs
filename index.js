@@ -6,6 +6,8 @@ class SSEManager {
     this.options = options || {};
     this.listClient = [];
     this.listMap = {};
+
+    this.heartBeatManager();
   }
 
   add(res, id) {
@@ -45,6 +47,14 @@ class SSEManager {
     this.listClient.forEach((inf) => {
       inf.client.sendEvent(eventName, data);
     });
+  }
+
+  heartBeatManager() {
+    setInterval(() => {
+      this.listClient.forEach((inf) => {
+        inf.client.send('');
+      });
+    }, 60000)
   }
 }
 

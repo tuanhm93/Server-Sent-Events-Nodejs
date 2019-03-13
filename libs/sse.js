@@ -23,11 +23,11 @@ class ServerSendEvent {
 
       this.res.write("retry: " + (option.retry || 3000) + '\n');
 
-      if (heartbeat) {
-        this.heartbeatInterval = setInterval(function () {
-          this.res.write("data: \n\n");
-        }.bind(this), option.heartbeat)
-      }
+      // if (heartbeat) {
+      //   this.heartbeatInterval = setInterval(function () {
+      //     this.res.write("data: \n\n");
+      //   }.bind(this), option.heartbeat)
+      // }
 
     } else {
       throw Error("Not a http response object")
@@ -101,7 +101,7 @@ class ServerSendEvent {
 
   disconnect(fn) {
     if (typeof fn === 'function') {
-      clearInterval(this.heartbeatInterval);
+      // clearInterval(this.heartbeatInterval);
       this.res.once('close', fn)
     } else {
       throw Error('Parameter must be a function')
